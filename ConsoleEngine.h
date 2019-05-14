@@ -165,6 +165,22 @@ public:
 				Draw(x, y, c, col);
 	}
 
+	void DrawString(int x, int y, wstring c, short col = 0x000F) {
+		for (size_t i = 0; i < c.size(); i++) {
+			m_bufScreen[y * m_nScreenWidth + x + i].Char.UnicodeChar = c[i];
+			m_bufScreen[y * m_nScreenWidth + x + i].Attributes = col;
+		}
+	}
+
+	void DrawStringAlpha(int x, int y, wstring c, short col = 0x000F) {
+		for (size_t i = 0; i < c.size(); i++) {
+			if (c[i] != L' ') {
+				m_bufScreen[y * m_nScreenWidth + x + i].Char.UnicodeChar = c[i];
+				m_bufScreen[y * m_nScreenWidth + x + i].Attributes = col;
+			}
+		}
+	}
+
 	void Clip(int& x, int& y) {
 		if (x < 0)
 			x = 0;
